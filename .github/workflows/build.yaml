@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      ubuntu-version:
+        description: What version of Ubuntu to use for the build (default is latest)
+        default: latest
+        required: false
+        type: string
+      packages:
+        description: Space-separated list of packages to install (e.g., "libsdl2-2.0-0 libsdl2-dev")
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  build:
+    name: Build on Ubuntu ${{ inputs.ubuntu-version }}
+    runs-on: ubuntu-${{ inputs.ubuntu-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Install packages
+        if: ${{ inputs.packages != '' }}
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: ${{ inputs.packages }}
+
+      - name: Set cc to clang
+        shell: bash
+        run: |
+            sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && sudo update-alternatives --set cc /usr/bin/clang
+
+      - name: Set c++ to clang++
+        shell: bash
+        run: |
+          sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && sudo update-alternatives --set c++ /usr/bin/clang++
+
+      - name: Build
+        run: make
