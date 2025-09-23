@@ -21,7 +21,7 @@
 
 .PHONY: all debug clean clean_self fclean re re_debug sane re_sane bonus
 
-NAME = megaphone
+NAME = Megaphone
 MAKE_MODE ?= release
 
 # Colors
@@ -58,7 +58,7 @@ INCLUDES = -Iincludes $(foreach lib,$(LIB_DIRS),-I$(lib)/includes)
 
 # Sources
 SRC_FILES := \
-	megaphone.cpp
+	Megaphone.cpp
 SRCS := $(addprefix $(SRC)/,$(SRC_FILES))
 OBJS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
