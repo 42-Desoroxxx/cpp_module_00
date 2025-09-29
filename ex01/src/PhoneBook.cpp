@@ -55,9 +55,9 @@ void PhoneBook::print() const {
 	std::cout << "│     Index|First name| Last name|  Nickname│" << std::endl;
 	for (short i = 0; i < size; i++) {
 		std::cout << "│";
-		std::cout << "         " << contacts[i].getIndex() << "│";
-		std::cout << _formatColumn(contacts[i].getFirstName()) << "│";
-		std::cout << _formatColumn(contacts[i].getLastName()) << "│";
+		std::cout << "         " << contacts[i].getIndex() << "|";
+		std::cout << _formatColumn(contacts[i].getFirstName()) << "|";
+		std::cout << _formatColumn(contacts[i].getLastName()) << "|";
 		std::cout << _formatColumn(contacts[i].getNickname()) << "│";
 		std::cout << std::endl;
 	}
@@ -165,7 +165,7 @@ int main(const int argc, const char *argv[]) {
 		} else if (input == "CLEAR") {
 			clearScreen();
 		} else {
-			printError("Invalid command!" + input);
+			printError("Invalid command (" + input + ")!");
 		}
 	}
 
