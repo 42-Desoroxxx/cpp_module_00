@@ -133,7 +133,7 @@ int main(const int argc, const char *argv[]) {
 			if (phoneBook.getSize() == 0)
 				continue;
 
-			std::cout << "Search: ";
+			std::cout << "\033[36mIndex:\033[0m ";
 			if (!std::getline(std::cin, input)) {
 				std::cout << std::endl << "Bye!" << std::endl;
 				break;
