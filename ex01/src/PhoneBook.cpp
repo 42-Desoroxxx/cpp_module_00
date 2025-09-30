@@ -130,6 +130,8 @@ int main(const int argc, const char *argv[]) {
 			phoneBook.add(Contact(0, firstName, lastName, nickname, phoneNumber, darkestSecret));
 		} else if (input == "SEARCH") {
 			phoneBook.print();
+			if (phoneBook.getSize() == 0)
+				continue;
 
 			std::cout << "Search: ";
 			if (!std::getline(std::cin, input)) {
