@@ -31,7 +31,7 @@ RED = \033[31m
 RESET = \033[0m
 
 # Compiler
-CC = c++
+COMPILER = c++
 BASE_FLAGS = \
 	-Wall -Wextra -std=c++98 \
  	-Werror=vla -pedantic-errors -Werror=int-conversion -Werror=incompatible-pointer-types -Werror=implicit-function-declaration -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
