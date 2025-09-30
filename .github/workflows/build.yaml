@@ -50,5 +50,5 @@ jobs:
           sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && sudo update-alternatives --set c++ /usr/bin/clang++
 
       - name: Build ${{ matrix.subfolder }}
-        working-directory: ${{ inputs.subfolder }}
+        working-directory: ${{ matrix.subfolder }}
         run: make
