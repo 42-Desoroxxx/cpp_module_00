@@ -1,24 +1,10 @@
 name: Pipeline
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - "**"
-  pull_request:
-    branches:
-      - "**"
+on: [ workflow_dispatch, push, pull_request ]
 
 jobs:
-  build_ex00_ubuntu_22_04:
-    name: Build `ex00` on Ubuntu 22.04
+  build:
+    name: Build
     uses: ./.github/workflows/build.yaml
     with:
-      ubuntu-version: 22.04
-      subfolder: ex00
-
-  build_ex00_ubuntu_latest:
-    name: Build `ex00` on Ubuntu latest
-    uses: ./.github/workflows/build.yaml
-    with:
-     subfolder: ex00
+      subfolders: '[ "ex00", "ex01", "ex02" ]'

@@ -3,26 +3,31 @@ name: Build
 on:
   workflow_call:
     inputs:
-      ubuntu-version:
-        description: What version of Ubuntu to use for the build (default is latest)
-        default: latest
+      ubuntu-versions:
+        description: Array of Ubuntu versions to build against (e.g., '["22.04","latest"]')
         required: false
         type: string
+        default: '[ "22.04", "latest" ]'
       packages:
         description: Space-separated list of packages to install (e.g., "libsdl2-2.0-0 libsdl2-dev")
         required: false
         type: string
         default: ''
-      subfolder:
-        description: Relative subfolder path to run build steps in (e.g., "ex00")
+      subfolders:
+        description: Array of relative subfolder paths to run build steps in (e.g., '["ex00","ex01"]')
         required: false
         type: string
-        default: .
+        default: '[ "." ]'
 
 jobs:
   build:
-    name: Build on Ubuntu ${{ inputs.ubuntu-version }}
-    runs-on: ubuntu-${{ inputs.ubuntu-version }}
+    name: Build ${{ matrix.subfolder }} on Ubuntu ${{ matrix.ubuntu }}
+    runs-on: ubuntu-${{ matrix.ubuntu }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu: ${{ fromJSON(inputs.ubuntu-versions) }}
+        subfolder: ${{ fromJSON(inputs.subfolders) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -38,13 +43,13 @@ jobs:
       - name: Set cc to clang
         shell: bash
         run: |
-            sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && sudo update-alternatives --set cc /usr/bin/clang
+          sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && sudo update-alternatives --set cc /usr/bin/clang
 
       - name: Set c++ to clang++
         shell: bash
         run: |
           sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && sudo update-alternatives --set c++ /usr/bin/clang++
 
-      - name: Build
-        working-directory: ${{ inputs.subfolder }}
+      - name: Build ${{ matrix.subfolder }}
+        working-directory: ${{ matrix.subfolder }}
         run: make
