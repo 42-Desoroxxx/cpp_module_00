@@ -73,7 +73,7 @@ static void printError(const std::string& error) {
 }
 
 int main(const int argc, const char *argv[]) {
-	const bool prouveur = argc == 2 && std::string(argv[1]) == "--prouveur";
+	const bool prouveurMode = argc == 2 && std::string(argv[1]) == "--prouveur";
 	PhoneBook phoneBook;
 
 	clearScreen();
@@ -81,10 +81,10 @@ int main(const int argc, const char *argv[]) {
 		std::cout << "\033[36mPhoneBook:\033[0m ";
 
 		std::string input;
-		if (!std::getline(std::cin, input) || input == "EXIT"  || (prouveur && input == "exit"))
+		if (!std::getline(std::cin, input) || input == "EXIT"  || (prouveurMode && input == "exit"))
 			break;
 
-		if (input == "ADD" || (prouveur && input == "add")) {
+		if (input == "ADD" || (prouveurMode && input == "add")) {
 			std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
 
 			std::cout << "First name: ";
@@ -128,7 +128,7 @@ int main(const int argc, const char *argv[]) {
 			}
 
 			phoneBook.add(Contact(0, firstName, lastName, nickname, phoneNumber, darkestSecret));
-		} else if (input == "SEARCH" || (prouveur && input == "search")) {
+		} else if (input == "SEARCH" || (prouveurMode && input == "search")) {
 			phoneBook.print();
 			if (phoneBook.getSize() == 0)
 				continue;
@@ -163,10 +163,10 @@ int main(const int argc, const char *argv[]) {
 			}
 
 			phoneBook.get(index).print();
-		} else if (!prouveur) {
-		} else if (input == "LIST" || (prouveur && input == "list")) {
+		} else if (!prouveurMode) {
+		} else if (input == "LIST" || (prouveurMode && input == "list")) {
 			phoneBook.print();
-		} else if (input == "CLEAR" || (prouveur && input == "clear")) {
+		} else if (input == "CLEAR" || (prouveurMode && input == "clear")) {
 			clearScreen();
 		} else {
 			printError("Invalid command (" + input + ")!");
