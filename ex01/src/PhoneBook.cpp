@@ -81,10 +81,10 @@ int main(const int argc, const char *argv[]) {
 		std::cout << "\033[36mPhoneBook:\033[0m ";
 
 		std::string input;
-		if (!std::getline(std::cin, input) || input == "EXIT")
+		if (!std::getline(std::cin, input) || input == "EXIT"  || (prouveur && input == "exit"))
 			break;
 
-		if (input == "ADD") {
+		if (input == "ADD" || (prouveur && input == "add")) {
 			std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
 
 			std::cout << "First name: ";
@@ -128,7 +128,7 @@ int main(const int argc, const char *argv[]) {
 			}
 
 			phoneBook.add(Contact(0, firstName, lastName, nickname, phoneNumber, darkestSecret));
-		} else if (input == "SEARCH") {
+		} else if (input == "SEARCH" || (prouveur && input == "search")) {
 			phoneBook.print();
 			if (phoneBook.getSize() == 0)
 				continue;
@@ -164,7 +164,7 @@ int main(const int argc, const char *argv[]) {
 
 			phoneBook.get(index).print();
 		} else if (!prouveur) {
-		} else if (input == "CLEAR") {
+		} else if (input == "CLEAR" || (prouveur && input == "clear")) {
 			clearScreen();
 		} else {
 			printError("Invalid command (" + input + ")!");
