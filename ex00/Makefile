@@ -31,7 +31,7 @@ RED = \033[31m
 RESET = \033[0m
 
 # Compiler
-CC = c++
+COMPILER = c++
 BASE_FLAGS = \
 	-Wall -Wextra -std=c++98 \
  	-Werror=vla -pedantic-errors -Werror=int-conversion -Werror=incompatible-pointer-types -Werror=implicit-function-declaration -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -79,7 +79,7 @@ else
 	endif
 endif
 
-ifeq ($(shell expr $(shell $(CC) -v 2>&1 | grep -oP 'version \K\d+') \>= 15), 1)
+ifeq ($(shell expr $(shell $(COMPILER) -v 2>&1 | grep -oP 'version \K\d+') \>= 15), 1)
     DEBUG_FLAGS += -fstrict-flex-arrays=3
     LDFLAGS += -fuse-ld=lld
 endif
@@ -100,7 +100,7 @@ $(OBJ):
 
 $(OBJ)/%.o: $(SRC)/%.cpp | $(OBJ)
 	@echo "$(BLUE)Compiling$(RESET) $<..."
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(COMPILER) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 -include $(DEPS)
 
@@ -116,7 +116,7 @@ libs:
 
 $(NAME): $(OBJS) | libs
 	@echo "$(GREEN)Linking$(RESET) $@..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIB_FILES) -o $@ $(LDFLAGS)
+	@$(COMPILER) $(CFLAGS) $(OBJS) $(LIB_FILES) -o $@ $(LDFLAGS)
 	@echo "$(GREEN)Successfully compiled $(NAME)!$(RESET)"
 
 clean_self:
