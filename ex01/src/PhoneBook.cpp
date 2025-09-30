@@ -171,5 +171,5 @@ int main(const int argc, const char *argv[]) {
 		}
 	}
 
-	std::cout << std::endl << "Bye!" << std::endl;
+	std::cout << "Bye!" << std::endl;
 }
