@@ -3,8 +3,15 @@ name: Pipeline
 on: [ workflow_dispatch, push, pull_request ]
 
 jobs:
-  build:
-    name: Build
+  build_on_ubuntu_22_04:
+    name: Build on Ubuntu 22.04
+    uses: ./.github/workflows/build.yaml
+    with:
+      ubuntu-version: 22.04
+      subfolders: '[ "ex00", "ex01", "ex02" ]'
+
+  build_on_ubuntu_latest:
+    name: Build on Ubuntu latest
     uses: ./.github/workflows/build.yaml
     with:
       subfolders: '[ "ex00", "ex01", "ex02" ]'
