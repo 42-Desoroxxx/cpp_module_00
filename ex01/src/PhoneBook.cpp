@@ -164,6 +164,8 @@ int main(const int argc, const char *argv[]) {
 
 			phoneBook.get(index).print();
 		} else if (!prouveur) {
+		} else if (input == "LIST" || (prouveur && input == "list")) {
+			phoneBook.print();
 		} else if (input == "CLEAR" || (prouveur && input == "clear")) {
 			clearScreen();
 		} else {
