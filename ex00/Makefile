@@ -57,7 +57,7 @@ INCLUDES = -Iincludes $(foreach lib,$(LIB_DIRS),-I$(lib)/includes)
 
 # Sources
 SRC_FILES := \
-	Megaphone.cpp
+	megaphone.cpp
 SRCS := $(addprefix $(SRC)/,$(SRC_FILES))
 OBJS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
