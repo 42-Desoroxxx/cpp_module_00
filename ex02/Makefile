@@ -21,7 +21,7 @@
 
 .PHONY: all debug clean clean_self fclean re re_debug sane re_sane bonus
 
-NAME = Test
+NAME = BankingTester
 MAKE_MODE ?= release
 
 # Colors
