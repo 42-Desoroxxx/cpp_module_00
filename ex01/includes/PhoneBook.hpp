@@ -3,6 +3,8 @@
 
 #include "Contact.hpp"
 
+#define CAPACITY 8
+
 class PhoneBook {
 public:
 	PhoneBook();
@@ -12,7 +14,7 @@ public:
 	void print() const;
 
 private:
-	Contact contacts[8];
+	Contact contacts[CAPACITY];
 	short size;
 };
 
